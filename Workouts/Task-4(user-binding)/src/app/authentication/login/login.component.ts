@@ -9,8 +9,6 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 export class LoginComponent {
     constructor(private router: Router, private activatedroute: ActivatedRoute) {
-
-
     }
     storeValue: Array<any>;
     firstname: string;

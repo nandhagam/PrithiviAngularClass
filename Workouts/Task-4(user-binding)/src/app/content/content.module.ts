@@ -16,7 +16,7 @@ import { ContentComponent } from './content.component';
     ContentRoutingModule
 
   ],
-  exports: [ContentRoutingModule]
+  /*   exports: [ContentRoutingModule] */
 
 })
 export class ContentModule { }

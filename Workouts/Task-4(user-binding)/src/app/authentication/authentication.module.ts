@@ -19,6 +19,6 @@ import { AuthenticationComponent } from './authentication.component';
     AuthenticationRoutingModule,
     FormsModule
   ],
-  exports: [AuthenticationRoutingModule]
+  /* exports: [AuthenticationRoutingModule] */
 })
 export class AuthenticationModule { }

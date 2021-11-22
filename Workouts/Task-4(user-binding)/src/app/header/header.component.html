@@ -27,7 +27,7 @@
           {{ firstname }} {{ lastname }}
         </a>
         <div class="dropdown-menu">
-          <a [style.text-decoration]="'none'">
+          <a [style.text-decoration]="'none'" [routerLink]="['/login']">
             <button type="submit" class="btn dropdown-item" (click)="clear()">
               Logout
             </button>

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { AuthenticationModule } from './authentication/authentication.module';
-import { ContentModule } from './content/content.module';
+/* import { AuthenticationModule } from './authentication/authentication.module';
+import { ContentModule } from './content/content.module'; */
 import { AppComponent } from './app.component';
 
 
@@ -19,8 +19,8 @@ import { HeaderComponent } from './header/header.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    AuthenticationModule,
-    ContentModule
+    /*   AuthenticationModule,
+      ContentModule */
   ],
   providers: [],
   bootstrap: [AppComponent]

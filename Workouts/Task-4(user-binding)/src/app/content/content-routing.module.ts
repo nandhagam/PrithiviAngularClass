@@ -4,12 +4,9 @@ import { ContentComponent } from './content.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
-  {
-    path: 'content', component: ContentComponent,
-    children: [
-      { path: 'welcome', component: WelcomeComponent }
-    ]
-  }
+  { path: '', component: WelcomeComponent }
+
+
 ];
 
 @NgModule({
