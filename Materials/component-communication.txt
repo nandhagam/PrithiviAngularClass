@@ -1,0 +1,7 @@
+1. @Input
+
+2. @Output
+
+3. @ViewChild
+
+4. RxJS => observable

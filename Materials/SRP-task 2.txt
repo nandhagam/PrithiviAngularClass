@@ -1,0 +1,14 @@
+App Module
+
+1.. HomePage => Home Module
+
+		Div => list using ngFor => array
+
+	1. Todo Component
+		Text box , button => add text and click button
+
+
+3. use ViewChild, output, input
+
+sessionStorage, localStorage, cookies
+

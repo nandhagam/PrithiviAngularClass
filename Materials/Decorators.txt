@@ -1,0 +1,17 @@
+ Always starts with @. It specifies as an Angular entity. It describes the entity behaviours like how it should be 
+instantiate, how it should be processed and how it should used at runtime. => Configuration Metadata.
+
+1. Class Decorator
+	Always placed before the class. So these are top-level decorators. Example @NgModule, @Component, @Injectable,
+	@Directives.
+
+
+2. Property Decorator
+	Decorating the property of component. Example @Input, @Output.
+
+
+3. Method Decorator
+
+
+
+4. Parameter Decorator

@@ -1,0 +1,13 @@
+1. Create new Angular application
+
+2. Create Two components
+
+3. Parent Component => App Component
+	a. Text box => enter some job
+	b. Button => submit
+	c. display Array values in view using *ngFor with the help of @output
+
+4. Child Component => JobListComponent
+	a. Array
+	b. console.log(Array)
+	c. alert last job

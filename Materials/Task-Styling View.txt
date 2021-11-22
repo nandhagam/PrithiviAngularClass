@@ -1,0 +1,18 @@
+1. In header place logo.
+2. Name app as "Task Tracker".
+3. Make my name as "firstname lastname".
+4. Make the page more colorful and stylish by using css.
+5. once the user filled the registration page and clicked submit, the values should be stored in localstorage
+6. if new registration happen check for email uniqueness and if not unique give intimation user.
+7. Design a login page
+8. Take input from the login page and compare with the values present in localstorage
+9. if it's present <point 3> should display.
+
+
+
+1. @outout
+2. localStorage
+3. Two way binding
+4. style binding
+5. class binding
+
