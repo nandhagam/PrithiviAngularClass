@@ -1,46 +1,44 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import {Component, ElementRef, EventEmitter, Output, ViewChild} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 
 export class LoginComponent {
-    constructor(private router: Router, private activatedroute: ActivatedRoute) {
-    }
-    storeValue: Array<any>;
-    firstname: string;
-    lastname: string;
-    counter: number = 0;
-    store: object;
-    @ViewChild("email") Email: ElementRef;
-    @ViewChild("password") Password: ElementRef;
+  constructor(private router: Router, private activatedroute: ActivatedRoute) {
+  }
 
-    submitValue = ($event: any) => {
-        this.storeValue = JSON.parse(localStorage.getItem("userDetails"));
-        for (let x in this.storeValue) {
-            if (this.Email.nativeElement.value == this.storeValue[x].email) {
-                this.store = {
-                    firstname: this.storeValue[x].firstname,
-                    lastname: this.storeValue[x].lastname,
-                    email: this.storeValue[x].email,
-                    password: this.storeValue[x].password
-                };
-                sessionStorage.setItem("userDetails", JSON.stringify(this.store));
-                this.router.navigate(['welcome'], { queryParams: { firstname: this.storeValue[x].firstname, lastname: this.storeValue[x].lastname } });
-                return;
-            }
+  storeValue: Array<any>;
+  firstname: string;
+  lastname: string;
+  counter: number = 0;
+  store: object;
+  @ViewChild("email") Email: ElementRef;
+  @ViewChild("password") Password: ElementRef;
+
+  submitValue = ($event: any) => {
+    this.storeValue = JSON.parse(localStorage.getItem("userDetails"));
+
+    if (this.storeValue) {
+      const loggedInUser = this.storeValue.find((user) => {
+        return user.email === this.Email.nativeElement.value;
+      })
+      if (!loggedInUser || loggedInUser.password !== this.Password.nativeElement.value) {
+        alert("Please check your login data.")
+        return;
+      }
+      sessionStorage.setItem("userDetails", JSON.stringify(loggedInUser));
+      this.router.navigate(['welcome'], {
+        queryParams: {
+          firstname: loggedInUser.firstname,
+          lastname: loggedInUser.lastname
         }
-        for (let x in this.storeValue) {
-            if (this.Email.nativeElement.value != this.storeValue[x].email) {
-                this.counter = this.counter + 1;
-            }
-        }
-        if (this.storeValue.length == this.counter) {
-            alert("Entered email does not exist");
-            this.counter = 0;
-        }
+      })
+    } else {
+      alert("No users registered.")
     }
+  }
 }
