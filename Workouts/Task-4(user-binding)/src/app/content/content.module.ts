@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ContentRoutingModule } from './content-routing.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ContentComponent } from './content.component';
+import { SharedmoduleModule } from '../sharedmodule/sharedmodule.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ContentComponent } from './content.component';
   ],
   imports: [
     CommonModule,
-    ContentRoutingModule
+    ContentRoutingModule,
+    SharedmoduleModule
 
   ],
   /*   exports: [ContentRoutingModule] */

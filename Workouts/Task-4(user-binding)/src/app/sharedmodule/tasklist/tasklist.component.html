@@ -1,0 +1,7 @@
+<h2>Task List</h2>
+<button type="submit" class="btn btn-primary m-3" (click)="getTask()">
+  Display task
+</button>
+<ul>
+  <li *ngFor="let task of taskarr">{{ task }}</li>
+</ul>
