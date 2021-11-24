@@ -11,9 +11,7 @@ const routes: Routes = [
   {
     path: 'content',
     loadChildren: () => import('./content/content.module').then(m => m.ContentModule)
-  },
-  { path: 'login', component: LoginComponent }
-
+  }
 ]
 
 
