@@ -1,0 +1,15 @@
+h2 {
+  text-align: center;
+  color: #000;
+}
+.form {
+  width: 350px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 5px;
+  background: radial-gradient(
+    circle,
+    rgba(238, 238, 174, 1) 0%,
+    rgba(153, 148, 233, 1) 100%
+  );
+}

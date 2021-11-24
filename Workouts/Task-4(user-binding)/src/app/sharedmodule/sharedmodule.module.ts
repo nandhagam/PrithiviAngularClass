@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 
-import { SharedmoduleRoutingModule } from './sharedmodule-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { AddtaskComponent } from './addtask/addtask.component';
-import { TasklistComponent } from './tasklist/tasklist.component';
-import { FormsModule } from '@angular/forms';
+import { LoginComponent } from '../authentication/login/login.component';
 
+const routes: Routes = [
+  { path: 'login', component: LoginComponent }
+]
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent,
-    AddtaskComponent,
-    TasklistComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
-    SharedmoduleRoutingModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forChild(routes)
   ],
   exports: [
-    HeaderComponent, FooterComponent, AddtaskComponent, TasklistComponent
+    HeaderComponent, FooterComponent
   ]
 })
 export class SharedmoduleModule { }
