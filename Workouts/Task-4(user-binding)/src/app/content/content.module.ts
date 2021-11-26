@@ -8,6 +8,7 @@ import { SharedmoduleModule } from '../sharedmodule/sharedmodule.module';
 import { AddtaskComponent } from './addtask/addtask.component';
 import { FormsModule } from '@angular/forms';
 import { TasklistComponent } from './tasklist/tasklist.component';
+import { TaskService } from './task.service';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { TasklistComponent } from './tasklist/tasklist.component';
     FormsModule
 
   ],
-  /*   exports: [ContentRoutingModule] */
+  providers: [TaskService]
 
 })
 export class ContentModule { }

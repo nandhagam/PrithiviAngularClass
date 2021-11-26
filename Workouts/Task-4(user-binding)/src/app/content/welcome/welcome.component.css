@@ -13,3 +13,6 @@ h1 {
   border-radius: 5px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5), -5px -5px 5px rgba(0, 0, 0, 0.5);
 }
+.tasklist {
+  overflow-y: auto;
+}

@@ -1,5 +1,5 @@
 import { Component, DoCheck } from '@angular/core';
-import * as moment from 'moment';
+import { TaskService } from '../task.service';
 
 
 @Component({
@@ -8,16 +8,11 @@ import * as moment from 'moment';
   styleUrls: ['./tasklist.component.css']
 })
 export class TasklistComponent implements DoCheck {
-  taskarr: Array<any> = [];
+  constructor(public taskservice: TaskService) { }
+  DisplayTask: Array<any> = [];
 
 
   ngDoCheck() {
-    this.taskarr = JSON.parse(localStorage.getItem("task"));
-    console.log(this.taskarr[0].date);
-    console.log("moment" + moment(this.taskarr[0].date).format('MM DD YYYY'));
+    this.DisplayTask = this.taskservice.displayTask;
   }
-
-
-
-
 }
