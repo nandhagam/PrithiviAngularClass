@@ -9,10 +9,6 @@ const routes: Routes = [
   { path: 'addtask', component: AddtaskComponent },
   { path: 'tasklist', component: TasklistComponent }
 
-
-
-
-
 ];
 
 @NgModule({

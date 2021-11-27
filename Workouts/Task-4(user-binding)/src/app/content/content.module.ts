@@ -25,7 +25,7 @@ import { TaskService } from './task.service';
     FormsModule
 
   ],
-  providers: [TaskService]
+  providers: []
 
 })
 export class ContentModule { }

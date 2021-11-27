@@ -15,20 +15,28 @@ export class AddtaskComponent {
   taskvalue: string;
   d: any;
   addTask() {
+    this.task = JSON.parse(localStorage.getItem("tasklist"));
     if (this.taskvalue == null || this.taskvalue == '') {
       alert("Kindly please enter any task to add in a list");
     }
     else {
       this.d = new Date();
       this.d = moment(this.d).format('MM-DD-YYYY [at] HH:mm:ss dddd');
+      if (!this.task) {
+        this.task = [];
+
+      }
       this.task.push(
         {
           task: this.taskvalue,
           date: this.d
         }
       );
+
       this.taskvalue = '';
+      localStorage.setItem("tasklist", JSON.stringify(this.task));
       this.taskservice.displayTask = this.task;
+
 
     }
 

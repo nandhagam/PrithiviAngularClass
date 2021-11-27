@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedmoduleModule } from './sharedmodule/sharedmodule.module';
+import { TaskService } from './content/task.service';
 
 
 
@@ -20,7 +21,7 @@ import { SharedmoduleModule } from './sharedmodule/sharedmodule.module';
     SharedmoduleModule
 
   ],
-  providers: [],
+  providers: [TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

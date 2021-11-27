@@ -15,6 +15,11 @@
       <button type="submit" class="btn btn-success mb-2" (click)="addTask()">
         Add Task
       </button>
+      <a [routerLink]="['../content/tasklist']">
+        <button type="submit" class="btn btn-success mb-2 ml-3">
+          Go to TaskList
+        </button>
+      </a>
     </div>
   </form>
 </div>
