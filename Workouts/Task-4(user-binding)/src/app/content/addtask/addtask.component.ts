@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import * as moment from 'moment';
-import {TaskService} from '../task.service';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-addtask',

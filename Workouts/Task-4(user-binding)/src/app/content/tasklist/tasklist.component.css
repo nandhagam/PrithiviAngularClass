@@ -16,9 +16,6 @@ tr,
 td {
   border: 1px solid black;
 }
-.taskdate {
-  width: 100px;
-}
 a {
   color: unset;
 }

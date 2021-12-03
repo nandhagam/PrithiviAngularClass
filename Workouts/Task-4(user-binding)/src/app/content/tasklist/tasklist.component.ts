@@ -1,4 +1,4 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { TaskService } from '../task.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -9,16 +9,17 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './tasklist.component.html',
   styleUrls: ['./tasklist.component.css']
 })
-export class TasklistComponent implements DoCheck {
+export class TasklistComponent implements OnInit {
 
   DisplayTask: Array<any> = [];
-  ydate: any;
-  date: any;
   faTrash = faTrash;
-  completed: any;
+  today = moment();
+  todayDate = this.today.format("MM-DD-YYYY");
+
 
   constructor(public taskservice: TaskService) {
   }
+
 
   ngOnInit() {
     this.DisplayTask = this.taskservice.displayTask;
@@ -27,33 +28,50 @@ export class TasklistComponent implements DoCheck {
     })
   }
 
-  ngDoCheck() {
-    // this.DisplayTask = this.taskservice.displayTask;
-
-    // if (this.completed == true) {
-    //   this.completed = "Task completed";
-    //   console.log(this.completed);
-    // }
-    // else {
-    //   this.completed = "Task open";
-    //   console.log(this.completed);
-    // }
+  checkBoxValue(event, index) {
+    this.DisplayTask[index].taskstatus == event;
+    localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
   }
 
   showYesterdayTask() {
-    const yesterday = moment().add(-1, 'days');
-    this.ydate = yesterday.format('MM-DD-YYYY');
-    console.log(this.ydate);
-    this.date = Date.parse(this.taskservice.displayTask[3].date);
-    console.log(this.date);
-    console.log(new Date(this.taskservice.displayTask[3].date));
-    this.date = moment(this.date).format('MM-DD-YYYY');
-    console.log(this.date);
-    if (this.date == this.ydate) {
-      alert("Equal");
+    let result: boolean;
+    let resultArray: Array<any> = [];
+    for (let i = 0; i < this.DisplayTask.length; i++) {
+      result = moment(this.DisplayTask[i].date).isBefore(this.todayDate);
+      if (result == true) {
+        resultArray.push(this.DisplayTask[i]);
+        console.log(resultArray);
+      }
     }
-    else {
-      alert("NotEqual");
+
+  }
+  showTodayTask() {
+    let result: boolean;
+    let resultArray: Array<any> = [];
+    for (let i = 0; i < this.DisplayTask.length; i++) {
+      result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
+      if (result == true) {
+        resultArray.push(this.DisplayTask[i]);
+        console.log(resultArray);
+      }
     }
+
+  }
+  showTomorrowTask() {
+    let result: boolean;
+    let resultArray: Array<any> = [];
+    for (let i = 0; i < this.DisplayTask.length; i++) {
+      result = moment(this.DisplayTask[i].date).isAfter(this.todayDate);
+      if (result == true) {
+        resultArray.push(this.DisplayTask[i]);
+        console.log(resultArray);
+      }
+    }
+
+  }
+  deleteTask(index) {
+    this.DisplayTask.splice(index, 1);
+    localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
+
   }
 }

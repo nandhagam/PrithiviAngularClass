@@ -4,8 +4,12 @@
   <button type="submit" class="btn btn-primary" (click)="showYesterdayTask()">
     YesterdayTasks
   </button>
-  <button type="submit" class="btn btn-primary">TodayTasks</button>
-  <button type="submit" class="btn btn-primary">TomorrowTasks</button>
+  <button type="submit" class="btn btn-primary" (click)="showTodayTask()">
+    TodayTasks
+  </button>
+  <button type="submit" class="btn btn-primary" (click)="showTomorrowTask()">
+    TomorrowTasks
+  </button>
 </div>
 
 <div class="taskcolor my-2">
@@ -31,13 +35,16 @@
     <thead class="thead-dark">
       <tr class="text-center">
         <th class="taskdate">Date</th>
-        <th class="w-25">Task</th>
-        <th>Status</th>
+        <th>Task</th>
+        <th class="w-25">Status</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let task of DisplayTask">
+      <tr
+        *ngFor="let task of DisplayTask; let index = index"
+        class="text-white font-weight-bold"
+      >
         <td>{{ task.date }}</td>
         <td>{{ task.task }}</td>
         <td>{{ task.taskstatus ? "Completed" : "Open" }}</td>
@@ -50,12 +57,14 @@
                   class="form-check-input m-1"
                   [(ngModel)]="task.taskstatus"
                   [ngModelOptions]="{ standalone: true }"
-                  (onModelChange)="console.log(task)"
+                  (ngModelChange)="checkBoxValue($event, index)"
                 />Completed
               </label>
             </div>
+            <a (click)="deleteTask(index)"
+              ><fa-icon [icon]="faTrash" class="ml-1"></fa-icon
+            ></a>
           </form>
-          <a><fa-icon [icon]="faTrash" class="ml-1"></fa-icon></a>
         </td>
       </tr>
     </tbody>
