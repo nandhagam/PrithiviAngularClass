@@ -19,7 +19,7 @@ export class TaskService {
       this.displayTask = [];
     }
     this.displayTask.push(task)
-    localStorage.setItem("tasklist", JSON.stringify(task));
+    localStorage.setItem("tasklist", JSON.stringify(this.displayTask));
     this.taskSubscription.next(this.displayTask);
 
   }
