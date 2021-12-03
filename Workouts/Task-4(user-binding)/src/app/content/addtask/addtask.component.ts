@@ -9,33 +9,39 @@ import { TaskService } from '../task.service';
 })
 export class AddtaskComponent {
 
-  constructor(public taskservice: TaskService) { }
 
-  task: Array<any> = [];
+  constructor(public taskservice: TaskService) {
+
+  }
+
   taskvalue: string;
-  d: any;
+  taskdate: any;
+
   addTask() {
-    this.task = JSON.parse(localStorage.getItem("tasklist"));
     if (this.taskvalue == null || this.taskvalue == '') {
       alert("Kindly please enter any task to add in a list");
     }
     else {
-      this.d = new Date();
-      this.d = moment(this.d).format('MM-DD-YYYY [at] HH:mm:ss dddd');
-      if (!this.task) {
-        this.task = [];
+      if (this.taskdate) {
+        this.taskdate = moment(this.taskdate).format('MM-DD-YYYY');
 
       }
-      this.task.push(
-        {
-          task: this.taskvalue,
-          date: this.d
-        }
-      );
+      else {
+        alert("Kindly please enter date or valid date");
+        return;
+      }
+
+
+      this.taskservice.onAddTask({
+        task: this.taskvalue,
+        date: this.taskdate,
+        taskstatus: false
+      })
 
       this.taskvalue = '';
-      localStorage.setItem("tasklist", JSON.stringify(this.task));
-      this.taskservice.displayTask = this.task;
+      this.taskdate = new Date();
+
+
 
 
     }

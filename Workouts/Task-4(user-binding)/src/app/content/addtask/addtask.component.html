@@ -12,6 +12,12 @@
         [(ngModel)]="taskvalue"
         [ngModelOptions]="{ standalone: true }"
       />
+      <input
+        type="date"
+        class="form-control mb-3"
+        [(ngModel)]="taskdate"
+        [ngModelOptions]="{ standalone: true }"
+      />
       <button type="submit" class="btn btn-success mb-2" (click)="addTask()">
         Add Task
       </button>

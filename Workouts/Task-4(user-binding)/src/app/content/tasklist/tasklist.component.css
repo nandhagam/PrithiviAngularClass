@@ -5,3 +5,45 @@ h2 {
 li span {
   font-weight: bolder;
 }
+.btn {
+  width: 150px;
+}
+.table-responsive {
+  margin: 0 auto;
+}
+table,
+tr,
+td {
+  border: 1px solid black;
+}
+.taskdate {
+  width: 100px;
+}
+a {
+  color: unset;
+}
+a:hover {
+  cursor: pointer;
+}
+.color {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+}
+.btns,
+.taskcolor {
+  display: flex;
+  justify-content: space-around;
+}
+.ycolor {
+  background-color: #e3170a;
+}
+.tdcolor {
+  background-color: #ff6b35;
+}
+.tmcolor {
+  background-color: #26532b;
+}
+span {
+  font-weight: bolder;
+}

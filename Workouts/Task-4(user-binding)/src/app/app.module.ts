@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedmoduleModule } from './sharedmodule/sharedmodule.module';
 import { TaskService } from './content/task.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -18,7 +19,8 @@ import { TaskService } from './content/task.service';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    SharedmoduleModule
+    SharedmoduleModule,
+    FontAwesomeModule
 
   ],
   providers: [TaskService],
