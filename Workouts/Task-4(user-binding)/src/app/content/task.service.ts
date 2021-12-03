@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as moment from 'moment';
-import { Subject } from 'rxjs';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +15,12 @@ export class TaskService {
   }
 
   onAddTask(task) {
-    if (this.displayTask == null) {
+    if (!this.displayTask) {
       this.displayTask = [];
     }
-    else {
-      this.displayTask.push(task)
-      localStorage.setItem("tasklist", JSON.stringify(task));
-      this.taskSubscription.next(this.displayTask);
-    }
+    this.displayTask.push(task)
+    localStorage.setItem("tasklist", JSON.stringify(task));
+    this.taskSubscription.next(this.displayTask);
 
   }
 
