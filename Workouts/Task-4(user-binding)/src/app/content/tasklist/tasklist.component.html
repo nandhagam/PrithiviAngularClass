@@ -1,13 +1,13 @@
 <h2>Task List</h2>
 
 <div class="btns">
-  <button type="submit" class="btn btn-primary" (click)="showYesterdayTask()">
+  <button type="submit" class="btn btn-primary" (click)="filterTask(-1)">
     YesterdayTasks
   </button>
-  <button type="submit" class="btn btn-primary" (click)="showTodayTask()">
+  <button type="submit" class="btn btn-primary" (click)="filterTask(0)">
     TodayTasks
   </button>
-  <button type="submit" class="btn btn-primary" (click)="showTomorrowTask()">
+  <button type="submit" class="btn btn-primary" (click)="filterTask(1)">
     TomorrowTasks
   </button>
 </div>
@@ -67,7 +67,7 @@
           </form>
         </td>
       </tr> -->
-      <tr *ngSwitchCase="'yesterday'" *ngFor="let task of resultArray">
+      <tr *ngFor="let task of resultArray; let index=index">
         <td>{{ task.date }}</td>
         <td>{{ task.task }}</td>
         <td>{{ task.taskstatus ? "Completed" : "Open" }}</td>

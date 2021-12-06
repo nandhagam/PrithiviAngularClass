@@ -23,7 +23,6 @@ import { TaskService } from './task.service';
     ContentRoutingModule,
     SharedmoduleModule,
     FormsModule
-
   ],
   providers: []
 

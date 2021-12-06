@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
-import { TaskService } from '../task.service';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import {TaskService} from '../task.service';
+import {faTrash} from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -18,15 +18,15 @@ export class TasklistComponent implements OnInit {
   day: string;
   resultArray: Array<any>;
 
-
   constructor(public taskservice: TaskService) {
   }
 
-
   ngOnInit() {
     this.DisplayTask = this.taskservice.displayTask;
+    this.resultArray = this.DisplayTask;
     this.taskservice.taskSubscription.subscribe((data: Array<any>) => {
       this.DisplayTask = data;
+      this.resultArray = data;
     })
   }
 
@@ -35,45 +35,41 @@ export class TasklistComponent implements OnInit {
     localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
   }
 
-  showYesterdayTask() {
+  filterTask(criteria: any) {
     let result: boolean;
-    let resultArray: Array<any> = [];
-    this.day = "yesterday";
-    for (let i = 0; i < this.DisplayTask.length; i++) {
-      result = moment(this.DisplayTask[i].date).isBefore(this.todayDate);
-      if (result == true) {
-        resultArray.push(this.DisplayTask[i]);
-        console.log(resultArray);
+    this.resultArray = [];
+    switch (criteria) {
+      case -1: {
+        this.DisplayTask.forEach((task, i) => {
+          result = moment((this.DisplayTask[i].date)).isBefore(this.todayDate);
+          if (result == true) {
+            this.resultArray.push(this.DisplayTask[i]);
+          }
+        })
+        break;
+      }
+      case 0: {
+        for (let i = 0; i < this.DisplayTask.length; i++) {
+          result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
+          if (result == true) {
+            this.resultArray.push(this.DisplayTask[i]);
+          }
+        }
+        break;
+      }
+      case 1: {
+        for (let i = 0; i < this.DisplayTask.length; i++) {
+          result = moment(this.DisplayTask[i].date).isAfter(this.todayDate);
+          if (result == true) {
+            this.resultArray.push(this.DisplayTask[i]);
+          }
+        }
+        break;
       }
     }
-
   }
-  showTodayTask() {
-    let result: boolean;
-    let resultArray: Array<any> = [];
-    this.day = "today";
-    for (let i = 0; i < this.DisplayTask.length; i++) {
-      result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
-      if (result == true) {
-        resultArray.push(this.DisplayTask[i]);
-        console.log(resultArray);
-      }
-    }
 
-  }
-  showTomorrowTask() {
-    let result: boolean;
-    let resultArray: Array<any> = [];
-    this.day = "tomorrow";
-    for (let i = 0; i < this.DisplayTask.length; i++) {
-      result = moment(this.DisplayTask[i].date).isAfter(this.todayDate);
-      if (result == true) {
-        resultArray.push(this.DisplayTask[i]);
-        console.log(resultArray);
-      }
-    }
 
-  }
   deleteTask(index) {
     this.DisplayTask.splice(index, 1);
     localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
