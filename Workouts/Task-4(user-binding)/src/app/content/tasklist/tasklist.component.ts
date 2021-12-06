@@ -15,6 +15,8 @@ export class TasklistComponent implements OnInit {
   faTrash = faTrash;
   today = moment();
   todayDate = this.today.format("MM-DD-YYYY");
+  day: string;
+  resultArray: Array<any>;
 
 
   constructor(public taskservice: TaskService) {
@@ -36,6 +38,7 @@ export class TasklistComponent implements OnInit {
   showYesterdayTask() {
     let result: boolean;
     let resultArray: Array<any> = [];
+    this.day = "yesterday";
     for (let i = 0; i < this.DisplayTask.length; i++) {
       result = moment(this.DisplayTask[i].date).isBefore(this.todayDate);
       if (result == true) {
@@ -48,6 +51,7 @@ export class TasklistComponent implements OnInit {
   showTodayTask() {
     let result: boolean;
     let resultArray: Array<any> = [];
+    this.day = "today";
     for (let i = 0; i < this.DisplayTask.length; i++) {
       result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
       if (result == true) {
@@ -60,6 +64,7 @@ export class TasklistComponent implements OnInit {
   showTomorrowTask() {
     let result: boolean;
     let resultArray: Array<any> = [];
+    this.day = "tomorrow";
     for (let i = 0; i < this.DisplayTask.length; i++) {
       result = moment(this.DisplayTask[i].date).isAfter(this.todayDate);
       if (result == true) {
