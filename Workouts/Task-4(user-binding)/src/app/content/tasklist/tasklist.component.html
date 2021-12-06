@@ -40,34 +40,8 @@
         <th>Action</th>
       </tr>
     </thead>
-    <tbody [ngSwitch]="day">
-      <!-- <tr
-        *ngFor="let task of DisplayTask; let index = index"
-        class="text-white font-weight-bold"
-      >
-        <td>{{ task.date }}</td>
-        <td>{{ task.task }}</td>
-        <td>{{ task.taskstatus ? "Completed" : "Open" }}</td>
-        <td>
-          <form>
-            <div class="form-check-inline">
-              <label class="form-check-label">
-                <input
-                  type="checkbox"
-                  class="form-check-input m-1"
-                  [(ngModel)]="task.taskstatus"
-                  [ngModelOptions]="{ standalone: true }"
-                  (ngModelChange)="checkBoxValue($event, index)"
-                />Completed
-              </label>
-            </div>
-            <a (click)="deleteTask(index)"
-              ><fa-icon [icon]="faTrash" class="ml-1"></fa-icon
-            ></a>
-          </form>
-        </td>
-      </tr> -->
-      <tr *ngFor="let task of resultArray; let index=index">
+    <tbody appBgcolor [style.color]="'#fff'">
+      <tr *ngFor="let task of resultArray; let index = index">
         <td>{{ task.date }}</td>
         <td>{{ task.task }}</td>
         <td>{{ task.taskstatus ? "Completed" : "Open" }}</td>

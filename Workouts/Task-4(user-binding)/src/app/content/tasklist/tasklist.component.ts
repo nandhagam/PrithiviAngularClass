@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import {TaskService} from '../task.service';
-import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import { TaskService } from '../task.service';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -15,7 +15,6 @@ export class TasklistComponent implements OnInit {
   faTrash = faTrash;
   today = moment();
   todayDate = this.today.format("MM-DD-YYYY");
-  day: string;
   resultArray: Array<any>;
 
   constructor(public taskservice: TaskService) {
@@ -49,21 +48,21 @@ export class TasklistComponent implements OnInit {
         break;
       }
       case 0: {
-        for (let i = 0; i < this.DisplayTask.length; i++) {
+        this.DisplayTask.forEach((task, i) => {
           result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
           if (result == true) {
             this.resultArray.push(this.DisplayTask[i]);
           }
-        }
+        })
         break;
       }
       case 1: {
-        for (let i = 0; i < this.DisplayTask.length; i++) {
+        this.DisplayTask.forEach((task, i) => {
           result = moment(this.DisplayTask[i].date).isAfter(this.todayDate);
           if (result == true) {
             this.resultArray.push(this.DisplayTask[i]);
           }
-        }
+        })
         break;
       }
     }

@@ -7,6 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from '../authentication/login/login.component';
+import { BgcolorDirective } from './directives/bgcolor.directive';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent }
@@ -15,7 +16,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BgcolorDirective
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [
-    HeaderComponent, FooterComponent, FontAwesomeModule
+    HeaderComponent, FooterComponent, FontAwesomeModule, BgcolorDirective
   ]
 })
 export class SharedmoduleModule { }
