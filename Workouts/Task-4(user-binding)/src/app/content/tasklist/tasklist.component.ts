@@ -1,4 +1,13 @@
-import { Component, ElementRef, HostBinding, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostBinding,
+  HostListener,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import * as moment from 'moment';
 import { TaskService } from '../task.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +20,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 })
 export class TasklistComponent implements OnInit {
 
+  @ViewChildren('task') tasks: QueryList<ElementRef>;
+
   DisplayTask: Array<any> = [];
   faTrash = faTrash;
   today = moment();
@@ -18,10 +29,6 @@ export class TasklistComponent implements OnInit {
   resultArray: Array<any>;
 
   constructor(public taskservice: TaskService, private bgColor: ElementRef) {
-  }
-  @HostBinding('style.color') color: string = '';
-  @HostListener('click') bgcolor() {
-    this.bgColor.nativeElement.style.background = "pink";
   }
 
   ngOnInit() {
@@ -33,6 +40,15 @@ export class TasklistComponent implements OnInit {
     })
   }
 
+  ngAfterViewChecked(){
+    const colors = ['green', 'yellow', 'red']
+
+    this.tasks.forEach((task, index) =>{
+      console.log(task)
+      task.nativeElement.style.backgroundColor=colors[index];
+    })
+  }
+
   checkBoxValue(event, index) {
     this.DisplayTask[index].taskstatus == event;
     localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
@@ -41,6 +57,7 @@ export class TasklistComponent implements OnInit {
   filterTask(criteria: any) {
     let result: boolean;
     this.resultArray = [];
+
     switch (criteria) {
       case -1: {
         this.DisplayTask.forEach((task, i) => {
@@ -48,12 +65,10 @@ export class TasklistComponent implements OnInit {
           if (result == true) {
             this.resultArray.push(this.DisplayTask[i]);
           }
-          this.color = "#e3170a";
         })
         break;
       }
       case 0: {
-        this.color = "#ff6b35";
         this.DisplayTask.forEach((task, i) => {
           result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
           if (result == true) {
@@ -63,7 +78,6 @@ export class TasklistComponent implements OnInit {
         break;
       }
       case 1: {
-        this.color = "#26532b";
         this.DisplayTask.forEach((task, i) => {
           result = moment(this.DisplayTask[i].date).isAfter(this.todayDate);
           if (result == true) {
@@ -73,6 +87,9 @@ export class TasklistComponent implements OnInit {
         break;
       }
     }
+
+
+
   }
 
 
