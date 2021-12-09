@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostBinding, HostListener, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { TaskService } from '../task.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,11 @@ export class TasklistComponent implements OnInit {
   todayDate = this.today.format("MM-DD-YYYY");
   resultArray: Array<any>;
 
-  constructor(public taskservice: TaskService) {
+  constructor(public taskservice: TaskService, private bgColor: ElementRef) {
+  }
+  @HostBinding('style.color') color: string = '';
+  @HostListener('click') bgcolor() {
+    this.bgColor.nativeElement.style.background = "pink";
   }
 
   ngOnInit() {
@@ -44,10 +48,12 @@ export class TasklistComponent implements OnInit {
           if (result == true) {
             this.resultArray.push(this.DisplayTask[i]);
           }
+          this.color = "#e3170a";
         })
         break;
       }
       case 0: {
+        this.color = "#ff6b35";
         this.DisplayTask.forEach((task, i) => {
           result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
           if (result == true) {
@@ -57,6 +63,7 @@ export class TasklistComponent implements OnInit {
         break;
       }
       case 1: {
+        this.color = "#26532b";
         this.DisplayTask.forEach((task, i) => {
           result = moment(this.DisplayTask[i].date).isAfter(this.todayDate);
           if (result == true) {
