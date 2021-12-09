@@ -1,23 +1,22 @@
-import { Directive, ElementRef, HostBinding, HostListener, OnInit } from '@angular/core';
-
+import { Directive, HostBinding, Input, OnInit } from '@angular/core';
+import * as moment from 'moment';
 @Directive({
   selector: '[appBgcolor]'
 })
 export class BgcolorDirective implements OnInit {
-
-  constructor(private bgColor: ElementRef) {
-    this.bgColor.nativeElement.style.background = "#26532b";
+  today = moment();
+  todayDate = this.today.format("MM-DD-YYYY");
+  @Input('appBgcolor') task: any = {};
+  constructor() {
   }
-  @HostListener('mouseover') setBgColor1() {
-    this.bgColor.nativeElement.style.background = "#FD151B";
-  }
-  @HostListener('mouseout') setBgColor2() {
-    this.bgColor.nativeElement.style.background = "#AFA98D";
-  }
-  @HostBinding('style.color') color: string = '';
+  @HostBinding('style.backgroundColor') bgColor: string = '';
+  @HostBinding('style.color') string = "#fff";
 
   ngOnInit() {
-    this.color = "#fff";
+    this.dayColor();
+  }
+  dayColor = () => {
+    this.bgColor = moment(this.task.date).isBefore(this.todayDate) ? "#e3170a" : moment(this.task.date).isSame(this.todayDate) ? "#ff6b35" : "#26532b";
   }
 
 }

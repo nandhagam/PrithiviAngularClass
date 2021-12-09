@@ -40,8 +40,11 @@
         <th>Action</th>
       </tr>
     </thead>
-    <tbody appBgcolor>
-      <tr *ngFor="let task of resultArray; let index = index">
+    <tbody>
+      <tr
+        [appBgcolor]="task"
+        *ngFor="let task of resultArray; let index = index"
+      >
         <td>{{ task.date }}</td>
         <td>{{ task.task }}</td>
         <td>{{ task.taskstatus ? "Completed" : "Open" }}</td>
