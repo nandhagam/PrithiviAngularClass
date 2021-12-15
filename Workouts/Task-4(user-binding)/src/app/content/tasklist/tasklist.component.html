@@ -10,6 +10,9 @@
   <button type="submit" class="btn btn-primary" (click)="filterTask(1)">
     TomorrowTasks
   </button>
+  <button type="submit" class="btn btn-primary" (click)="filterTask(2)">
+    AllTasks
+  </button>
 </div>
 
 <div class="taskcolor my-2">
@@ -41,32 +44,34 @@
       </tr>
     </thead>
     <tbody>
-      <tr
-        [appBgcolor]="task"
-        *ngFor="let task of resultArray; let index = index"
-      >
-        <td>{{ task.date }}</td>
-        <td>{{ task.task }}</td>
-        <td>{{ task.taskstatus ? "Completed" : "Open" }}</td>
-        <td>
-          <form>
-            <div class="form-check-inline">
-              <label class="form-check-label">
-                <input
-                  type="checkbox"
-                  class="form-check-input m-1"
-                  [(ngModel)]="task.taskstatus"
-                  [ngModelOptions]="{ standalone: true }"
-                  (ngModelChange)="checkBoxValue($event, index)"
-                />Completed
-              </label>
-            </div>
-            <a (click)="deleteTask(index)"
-              ><fa-icon [icon]="faTrash" class="ml-1"></fa-icon
-            ></a>
-          </form>
-        </td>
-      </tr>
+      <ng-container *appCustomStructural [ngTemplateOutlet]="tasktable">
+      </ng-container>
     </tbody>
   </table>
 </div>
+
+<ng-template #tasktable>
+  <tr [appBgcolor]="task" *ngFor="let task of resultArray; let index = index">
+    <td>{{ task.date }}</td>
+    <td>{{ task.task }}</td>
+    <td>{{ task.taskstatus ? "Completed" : "Open" }}</td>
+    <td>
+      <form>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              class="form-check-input m-1"
+              [(ngModel)]="task.taskstatus"
+              [ngModelOptions]="{ standalone: true }"
+              (ngModelChange)="checkBoxValue($event, index)"
+            />Completed
+          </label>
+        </div>
+        <a (click)="deleteTask(index)"
+          ><fa-icon [icon]="faTrash" class="ml-1"></fa-icon
+        ></a>
+      </form>
+    </td>
+  </tr>
+</ng-template>

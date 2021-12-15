@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from '../authentication/login/login.component';
 import { BgcolorDirective } from './directives/bgcolor.directive';
+import { CustomStructuralDirective } from './directives/custom-structural.directive';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent }
@@ -17,7 +18,8 @@ const routes: Routes = [
   declarations: [
     HeaderComponent,
     FooterComponent,
-    BgcolorDirective
+    BgcolorDirective,
+    CustomStructuralDirective
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [
-    HeaderComponent, FooterComponent, FontAwesomeModule, BgcolorDirective
+    HeaderComponent, FooterComponent, FontAwesomeModule, BgcolorDirective, CustomStructuralDirective
   ]
 })
 export class SharedmoduleModule { }
