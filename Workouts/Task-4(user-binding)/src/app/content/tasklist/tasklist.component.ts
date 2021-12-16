@@ -24,21 +24,22 @@ export class TasklistComponent implements OnInit {
     this.DisplayTask = this.taskservice.displayTask;
     this.taskservice.taskSubscription.subscribe((data: Array<any>) => {
       this.DisplayTask = data;
+      this.DisplayTask.forEach((task, i) => {
+        let result: boolean;
+        result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
+        if (result == true) {
+          this.resultArray.push(this.DisplayTask[i]);
+        }
+      })
     })
-    this.displayDefault();
+    /*  this.displayDefault(); */
 
   }
 
-  displayDefault() {
-    this.DisplayTask.forEach((task, i) => {
-      let result: boolean;
-      result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
-      if (result == true) {
-        this.resultArray.push(this.DisplayTask[i]);
-      }
-    })
+  /* displayDefault() {
+    
   }
-
+ */
   checkBoxValue(event, index) {
     this.DisplayTask[index].taskstatus == event;
     localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
