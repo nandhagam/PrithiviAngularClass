@@ -25,6 +25,11 @@ export class TasklistComponent implements OnInit {
     this.taskservice.taskSubscription.subscribe((data: Array<any>) => {
       this.DisplayTask = data;
     })
+    this.displayDefault();
+
+  }
+
+  displayDefault() {
     this.DisplayTask.forEach((task, i) => {
       let result: boolean;
       result = moment(this.DisplayTask[i].date).isSame(this.todayDate);

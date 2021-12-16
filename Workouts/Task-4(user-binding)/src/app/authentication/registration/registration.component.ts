@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class RegistrationComponent {
   @ViewChild("email") Email: ElementRef;
   @ViewChild("password") Password: ElementRef;
 
+  constructor(private router: Router) { }
 
   displayDetails() {
     console.log("FirstName:" + this.firstname);
@@ -25,31 +27,41 @@ export class RegistrationComponent {
   sendData = ($event: any) => {
     this.storeValue = JSON.parse(localStorage.getItem("userDetails"));
 
-    for (let x in this.storeValue) {
-      if (this.Email.nativeElement.value == this.storeValue[x].email) {
-        this.display = true;
-        alert("Entered Email Address is already in use");
-        break;
+
+    if (this.firstname && this.lastname
+      && this.Email.nativeElement.value && this.Password.nativeElement.value) {
+      for (let x in this.storeValue) {
+
+        if (this.Email.nativeElement.value == this.storeValue[x].email) {
+          this.display = true;
+          alert("Entered Email Address is already in use");
+          break;
+        }
+        else {
+          this.display = false;
+        }
       }
-      else {
-        this.display = false;
+      if (!this.display) {
+        if (!this.storeValue) {
+          this.storeValue = [];
+          localStorage.setItem("userDetails", "[]");
+        }
+        this.storeValue.push(
+          {
+            firstname: this.firstname,
+            lastname: this.lastname,
+            email: this.Email.nativeElement.value,
+            password: this.Password.nativeElement.value
+          })
+        localStorage.setItem("userDetails", JSON.stringify(this.storeValue));
+        alert("Registration Successfully Done...!");
+        this.router.navigate(['login']);
       }
     }
-    if (!this.display) {
-      if (!this.storeValue) {
-        this.storeValue = [];
-        localStorage.setItem("userDetails", "[]");
-      }
-      this.storeValue.push(
-        {
-          firstname: this.firstname,
-          lastname: this.lastname,
-          email: this.Email.nativeElement.value,
-          password: this.Password.nativeElement.value
-        })
-      localStorage.setItem("userDetails", JSON.stringify(this.storeValue));
-      alert("Registration Successfully Done...!")
+    else {
+      alert("Kindly please fill all the field")
     }
+
   }
 
 

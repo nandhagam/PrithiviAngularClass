@@ -18,10 +18,12 @@ export class LoginComponent {
     @ViewChild("email") Email: ElementRef;
     @ViewChild("password") Password: ElementRef;
 
+
     submitValue = ($event: any) => {
         this.storeValue = JSON.parse(localStorage.getItem("userDetails"));
         for (let x in this.storeValue) {
-            if (this.Email.nativeElement.value == this.storeValue[x].email) {
+            if (this.Email.nativeElement.value == this.storeValue[x].email &&
+                this.Password.nativeElement.value == this.storeValue[x].password) {
                 this.store = {
                     firstname: this.storeValue[x].firstname,
                     lastname: this.storeValue[x].lastname,
@@ -43,4 +45,5 @@ export class LoginComponent {
             this.counter = 0;
         }
     }
+
 }
