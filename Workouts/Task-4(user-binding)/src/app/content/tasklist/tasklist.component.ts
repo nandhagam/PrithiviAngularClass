@@ -21,25 +21,28 @@ export class TasklistComponent implements OnInit {
 
 
   ngOnInit() {
-    this.DisplayTask = this.taskservice.displayTask;
+    this.DisplayTask = this.taskservice.displayTask || [];
+    this.displayDefault();
     this.taskservice.taskSubscription.subscribe((data: Array<any>) => {
       this.DisplayTask = data;
-      this.DisplayTask.forEach((task, i) => {
-        let result: boolean;
-        result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
-        if (result == true) {
-          this.resultArray.push(this.DisplayTask[i]);
-        }
-      })
+      this.displayDefault();
+
     })
-    /*  this.displayDefault(); */
+
 
   }
 
-  /* displayDefault() {
-    
+  displayDefault() {
+    this.DisplayTask.forEach((task, i) => {
+      let result: boolean;
+      result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
+      if (result == true) {
+        this.resultArray.push(this.DisplayTask[i]);
+      }
+
+    })
   }
- */
+
   checkBoxValue(event, index) {
     this.DisplayTask[index].taskstatus == event;
     localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
@@ -85,9 +88,9 @@ export class TasklistComponent implements OnInit {
   }
 
 
-  deleteTask(index) {
+  deleteTask(resultArray, taskId) {
+    let index = this.DisplayTask.findIndex(resultArray => resultArray.taskId == taskId);
     this.DisplayTask.splice(index, 1);
     localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
-
   }
 }

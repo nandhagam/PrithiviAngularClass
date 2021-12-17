@@ -20,7 +20,7 @@ export class LoginComponent {
 
 
     submitValue = ($event: any) => {
-        this.storeValue = JSON.parse(localStorage.getItem("userDetails"));
+        this.storeValue = JSON.parse(localStorage.getItem("userDetails")) || [];
         for (let x in this.storeValue) {
             if (this.Email.nativeElement.value == this.storeValue[x].email &&
                 this.Password.nativeElement.value == this.storeValue[x].password) {
@@ -36,12 +36,13 @@ export class LoginComponent {
             }
         }
         for (let x in this.storeValue) {
-            if (this.Email.nativeElement.value != this.storeValue[x].email) {
+            if (this.Email.nativeElement.value != this.storeValue[x].email
+                || this.Password.nativeElement.value != this.storeValue[x].password) {
                 this.counter = this.counter + 1;
             }
         }
         if (this.storeValue.length == this.counter) {
-            alert("Entered email does not exist");
+            alert("Entered email does not exist or check your credentials");
             this.counter = 0;
         }
     }

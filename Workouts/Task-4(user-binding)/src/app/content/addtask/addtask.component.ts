@@ -16,8 +16,18 @@ export class AddtaskComponent {
 
   taskvalue: string;
   taskdate: any = new Date();
+  taskDetails: Array<any>;
+  taskId: number;
+
 
   addTask() {
+    this.taskDetails = JSON.parse(localStorage.getItem("tasklist")) || [];
+    if (this.taskDetails.length == 0) {
+      this.taskId = 1;
+    }
+    else {
+      this.taskId = this.taskDetails[this.taskDetails.length - 1].taskId + 1;
+    }
     if (this.taskvalue == null || this.taskvalue == '') {
       alert("Kindly please enter any task to add in a list");
     } else {
@@ -32,9 +42,10 @@ export class AddtaskComponent {
       this.taskservice.onAddTask({
         task: this.taskvalue,
         date: this.taskdate,
-        taskstatus: false
+        taskstatus: false,
+        taskId: this.taskId
       })
-
+      console.log(this.taskId)
       this.taskvalue = '';
       this.taskdate = new Date();
 
