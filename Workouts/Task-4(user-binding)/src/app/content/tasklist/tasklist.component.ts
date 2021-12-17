@@ -87,7 +87,10 @@ export class TasklistComponent implements OnInit {
 
 
   deleteTask(index) {
-    this.DisplayTask.splice(index, 1);
+   /* this.DisplayTask.splice(index, 1);*/
+    // task.id => findIndex => splice
+
+    // _.remove
     localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
 
   }
