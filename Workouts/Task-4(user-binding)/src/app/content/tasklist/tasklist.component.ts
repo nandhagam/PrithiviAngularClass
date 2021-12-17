@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
-import { TaskService } from '../task.service';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import {TaskService} from '../task.service';
+import {faTrash} from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -16,30 +16,31 @@ export class TasklistComponent implements OnInit {
   today = moment();
   todayDate = this.today.format("MM-DD-YYYY");
   resultArray: Array<any> = [];
+
   constructor(public taskservice: TaskService) {
   }
 
 
   ngOnInit() {
-    this.DisplayTask = this.taskservice.displayTask;
+    this.DisplayTask = this.taskservice.displayTask || [];
+    this.displayDefault();
     this.taskservice.taskSubscription.subscribe((data: Array<any>) => {
       this.DisplayTask = data;
-      this.DisplayTask.forEach((task, i) => {
-        let result: boolean;
-        result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
-        if (result == true) {
-          this.resultArray.push(this.DisplayTask[i]);
-        }
-      })
+      this.displayDefault();
     })
-    /*  this.displayDefault(); */
-
   }
 
-  /* displayDefault() {
-    
+  displayDefault() {
+    this.DisplayTask.forEach((task, i) => {
+      let result: boolean;
+      result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
+      if (result == true) {
+        this.resultArray.push(this.DisplayTask[i]);
+      }
+    })
   }
- */
+
+
   checkBoxValue(event, index) {
     this.DisplayTask[index].taskstatus == event;
     localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
