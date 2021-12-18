@@ -31,6 +31,7 @@ export class TasklistComponent implements OnInit {
   }
 
   displayDefault() {
+    this.resultArray = [];
     this.DisplayTask.forEach((task, i) => {
       let result: boolean;
       result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
@@ -55,8 +56,6 @@ export class TasklistComponent implements OnInit {
           result = moment(this.DisplayTask[i].date).isBefore(this.todayDate);
           if (result == true) {
             this.resultArray.push(this.DisplayTask[i]);
-
-
           }
         })
         break;
