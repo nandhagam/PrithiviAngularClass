@@ -5,7 +5,7 @@ import * as moment from 'moment';
 })
 export class BgcolorDirective implements OnInit {
   today = moment();
-  todayDate = this.today.format("MM-DD-YYYY");
+  todayDate = this.today.format("YYYY MM DD")
   @Input('appBgcolor') task: any = {};
   constructor() {
   }

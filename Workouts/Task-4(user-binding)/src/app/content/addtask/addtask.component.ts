@@ -15,7 +15,7 @@ export class AddtaskComponent {
   }
 
   taskvalue: string;
-  taskdate: any = new Date();
+  taskdate: any;
   taskDetails: Array<any>;
   taskId: number;
 
@@ -28,16 +28,11 @@ export class AddtaskComponent {
     else {
       this.taskId = this.taskDetails[this.taskDetails.length - 1].taskId + 1;
     }
-    if (this.taskvalue == null || this.taskvalue == '') {
-      alert("Kindly please enter any task to add in a list");
-    } else {
-      if (this.taskdate) {
-        this.taskdate = moment(this.taskdate).format('MM-DD-YYYY');
-
-      } else {
-        alert("Kindly please enter date or valid date");
-        return;
-      }
+    if (this.taskvalue == undefined || this.taskvalue == ''
+      || this.taskdate == undefined || this.taskdate == '') {
+      alert("Kindly please enter any task  & date to add in a list");
+    }
+    else {
 
       this.taskservice.onAddTask({
         task: this.taskvalue,
@@ -45,9 +40,8 @@ export class AddtaskComponent {
         taskstatus: false,
         taskId: this.taskId
       })
-      console.log(this.taskId)
       this.taskvalue = '';
-      this.taskdate = new Date();
+      this.taskdate = '';
 
     }
 

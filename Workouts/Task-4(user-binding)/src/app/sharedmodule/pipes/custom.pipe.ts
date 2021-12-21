@@ -1,58 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment';
-import { TaskService } from '../task.service';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-
-@Component({
-  selector: 'app-tasklist',
-  templateUrl: './tasklist.component.html',
-  styleUrls: ['./tasklist.component.css']
+@Pipe({
+  name: 'custom'
 })
-export class TasklistComponent implements OnInit {
+export class CustomPipe implements PipeTransform {
 
+  filterCriteria = 0;
   DisplayTask: Array<any> = [];
-  faTrash = faTrash;
+  resultArray: Array<any> = [];
   today = moment();
   todayDate = this.today.format("YYYY MM DD");
-  resultArray: Array<any> = [];
 
-  constructor(public taskservice: TaskService) {
+  transform(value: unknown, ...args: unknown[]): unknown {
+    return null;
   }
 
-
-  ngOnInit() {
-    this.DisplayTask = this.taskservice.displayTask || [];
-    this.displayDefault();
-    /* this.filterTask(this.filterCriteria); */
-    this.taskservice.taskSubscription.subscribe((data: Array<any>) => {
-      this.DisplayTask = data;
-      this.displayDefault();
-      /* this.filterTask(this.filterCriteria); */
-
-    })
-
-
-  }
-
-  displayDefault() {
-    this.resultArray = [];
-    this.DisplayTask.forEach((task, i) => {
-      let result: boolean;
-      result = moment(this.DisplayTask[i].date).isSame(this.todayDate);
-      if (result == true) {
-        this.resultArray.push(this.DisplayTask[i]);
-      }
-
-    })
-  }
-
-  checkBoxValue(event, index) {
-    this.DisplayTask[index].taskstatus == event;
-    localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
-  }
-
-  /* filterTask(criteria: any) {
+  filterTask(criteria: any) {
     this.filterCriteria = criteria;
     let result: boolean;
     this.resultArray = [];
@@ -98,6 +62,7 @@ export class TasklistComponent implements OnInit {
     this.DisplayTask.splice(index, 1);
     localStorage.setItem("tasklist", JSON.stringify(this.DisplayTask));
     /*  this.displayDefault(); */
-  /*  this.filterTask(this.filterCriteria);
- } */
+    this.filterTask(this.filterCriteria);
+  }
+
 }
