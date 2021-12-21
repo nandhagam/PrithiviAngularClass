@@ -16,6 +16,7 @@ export class TasklistComponent implements OnInit {
   today = moment();
   todayDate = this.today.format("YYYY MM DD");
   resultArray: Array<any> = [];
+  /*  filterCriteria = 0; */
 
   constructor(public taskservice: TaskService) {
   }
@@ -28,7 +29,7 @@ export class TasklistComponent implements OnInit {
     this.taskservice.taskSubscription.subscribe((data: Array<any>) => {
       this.DisplayTask = data;
       this.displayDefault();
-      /* this.filterTask(this.filterCriteria); */
+      /*  this.filterTask(this.filterCriteria); */
 
     })
 
