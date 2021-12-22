@@ -1,16 +1,16 @@
 <h2>Task List</h2>
 
 <div class="btns">
-  <button type="submit" class="btn btn-primary" (click)="filterTask(-1)">
+  <button type="submit" class="btn btn-primary" (click)="filterCriteria = -1">
     YesterdayTasks
   </button>
-  <button type="submit" class="btn btn-primary" (click)="filterTask(0)">
+  <button type="submit" class="btn btn-primary" (click)="filterCriteria = 0">
     TodayTasks
   </button>
-  <button type="submit" class="btn btn-primary" (click)="filterTask(1)">
+  <button type="submit" class="btn btn-primary" (click)="filterCriteria = 1">
     TomorrowTasks
   </button>
-  <button type="submit" class="btn btn-primary" (click)="filterTask(2)">
+  <button type="submit" class="btn btn-primary" (click)="filterCriteria = 2">
     AllTasks
   </button>
 </div>
@@ -54,7 +54,7 @@
 <ng-template #tasktable>
   <tr
     [appBgcolor]="task"
-    *ngFor="let task of resultArray | custom: criteria; let index = index"
+    *ngFor="let task of DisplayTask | custom: filterCriteria; let index = index"
   >
     <td>{{ task.taskId }}</td>
     <td>{{ task.date | date: "MM-dd-yyyy" }}</td>
