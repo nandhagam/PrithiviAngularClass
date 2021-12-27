@@ -1,6 +1,6 @@
 <h2>Add Task</h2>
 <div class="form">
-  <form>
+  <form #addtaskform="ngForm" (ngSubmit)="addTask(addtaskform)">
     <div class="form-group mx-3">
       <label for="task" [style.font-weight]="'bolder'" class="mb-3"
         >Task:</label
@@ -19,11 +19,9 @@
         [(ngModel)]="taskdate"
         [ngModelOptions]="{ standalone: true }"
       />
-      <button type="submit" class="btn btn-success mb-2" (click)="addTask()">
-        Add Task
-      </button>
+      <button type="submit" class="btn btn-success mb-2 left">Add Task</button>
       <a [routerLink]="['../content/tasklist']">
-        <button type="submit" class="btn btn-success mb-2 ml-3">
+        <button type="submit" class="btn btn-success mb-2 right">
           Go to TaskList
         </button>
       </a>

@@ -1,6 +1,6 @@
 <div class="container" [class]="'h-container'">
   <div class="form">
-    <form>
+    <form #registrationform="ngForm" (ngSubmit)="formFun(registrationform)">
       <div class="form-group mb-3">
         <label for="firstname" [style.font-weight]="'bolder'">FirstName:</label>
         <input

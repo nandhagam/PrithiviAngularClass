@@ -17,9 +17,11 @@ export class LoginComponent {
     store: object;
     @ViewChild("email") Email: ElementRef;
     @ViewChild("password") Password: ElementRef;
+    @ViewChild("loginform") loginForm: any;
 
 
     submitValue = ($event: any) => {
+        console.log(this.loginForm);
         this.storeValue = JSON.parse(localStorage.getItem("userDetails")) || [];
         for (let x in this.storeValue) {
             if (this.Email.nativeElement.value == this.storeValue[x].email &&

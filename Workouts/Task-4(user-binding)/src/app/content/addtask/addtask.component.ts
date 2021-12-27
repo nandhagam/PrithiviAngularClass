@@ -20,7 +20,8 @@ export class AddtaskComponent {
   taskId: number;
 
 
-  addTask() {
+  addTask(form) {
+    console.log(form);
     this.taskDetails = JSON.parse(localStorage.getItem("tasklist")) || [];
     if (this.taskDetails.length == 0) {
       this.taskId = 1;
