@@ -21,7 +21,7 @@ export class LoginComponent {
 
 
     submitValue = ($event: any) => {
-        console.log(this.loginForm);
+
         this.storeValue = JSON.parse(localStorage.getItem("userDetails")) || [];
         for (let x in this.storeValue) {
             if (this.Email.nativeElement.value == this.storeValue[x].email &&
@@ -48,5 +48,7 @@ export class LoginComponent {
             this.counter = 0;
         }
     }
-
+    formData() {
+        console.log(this.loginForm);
+    }
 }

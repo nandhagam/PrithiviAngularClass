@@ -16,11 +16,13 @@ export class RegistrationComponent {
   @ViewChild("email") Email: ElementRef;
   @ViewChild("password") Password: ElementRef;
   @ViewChild("registrationform") registrationForm: any;
+  @ViewChild("fname") Fname: any;
 
   constructor(private router: Router) { }
 
   displayDetails() {
     console.log(this.registrationForm);
+    console.log(this.Fname);
     console.log("FirstName:" + this.firstname);
     console.log("LastName:" + this.lastname);
     console.log("Email:" + this.Email.nativeElement.value);

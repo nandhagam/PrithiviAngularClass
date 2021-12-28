@@ -1,57 +1,117 @@
 <div class="container" [class]="'h-container'">
   <div class="form">
     <form #registrationform="ngForm" (ngSubmit)="formFun(registrationform)">
-      <div class="form-group mb-3">
+      <div class="form-group mb-2">
         <label for="firstname" [style.font-weight]="'bolder'">FirstName:</label>
         <input
           type="text"
-          class="form-control mt-2"
+          class="form-control mt-1"
           placeholder="Enter Your FirstName"
           [(ngModel)]="firstname"
-          [ngModelOptions]="{ standalone: true }"
           required
           (key.enter)="sendData($event)"
+          name="fname"
+          #fname="ngModel"
+          pattern="[a-zA-Z]"
         />
+        <small
+          *ngIf="registrationform.submitted"
+          [ngStyle]="{ color: 'red', 'font-weight': 'bolder' }"
+        >
+          <span *ngIf="fname.hasError('required')">
+            This field is mandatory
+          </span>
+          <span *ngIf="fname.hasError('pattern')">
+            This field only accept alphabets
+          </span>
+        </small>
       </div>
-      <div class="form-group mb-3">
+
+      <div class="form-group mb-2">
         <label for="lastname" [style.font-weight]="'bolder'">LastName:</label>
         <input
           type="text"
-          class="form-control mt-2"
+          class="form-control mt-1"
           placeholder="Enter Your LastName"
           [(ngModel)]="lastname"
-          [ngModelOptions]="{ standalone: true }"
           required
           (key.enter)="sendData($event)"
+          name="lname"
+          #lname="ngModel"
+          pattern="[a-zA-Z]"
         />
+        <small
+          *ngIf="registrationform.submitted"
+          [ngStyle]="{ color: 'red', 'font-weight': 'bolder' }"
+        >
+          <span *ngIf="lname.hasError('required')"
+            >This field is mandatory</span
+          >
+          <span *ngIf="lname.hasError('pattern')">
+            This field only accept alphabets
+          </span>
+        </small>
       </div>
-      <div class="form-group mb-3">
+
+      <div class="form-group mb-2">
         <label for="email" [style.font-weight]="'bolder'">Email:</label>
         <input
           type="email"
-          class="form-control mt-2"
+          class="form-control mt-1"
           placeholder="Enter Your Email Address"
           #email
           required
           (key.enter)="sendData($event)"
+          name="emailInput"
+          #emailInput="ngModel"
+          ngModel
+          email
         />
+        <small
+          *ngIf="registrationform.submitted"
+          [ngStyle]="{ color: 'red', 'font-weight': 'bolder' }"
+        >
+          <span *ngIf="emailInput.hasError('required')">
+            This field is mandatory
+          </span>
+          <span *ngIf="emailInput.hasError('email')">
+            Please enter a valid email address
+          </span>
+        </small>
       </div>
-      <div class="form-group mb-3">
+
+      <div class="form-group mb-2">
         <label for="password" [style.font-weight]="'bolder'">Password:</label>
         <input
           type="password"
-          class="form-control mt-2"
+          class="form-control mt-1"
           placeholder="Enter Your Password"
           #password
           required
           (key.enter)="sendData($event)"
+          name="passwordInput"
+          #passwordInput="ngModel"
+          ngModel
+          minlength="2"
+          maxlength="12"
         />
+        <small
+          *ngIf="registrationform.submitted"
+          [ngStyle]="{ color: 'red', 'font-weight': 'bolder' }"
+        >
+          <span *ngIf="passwordInput.hasError('required')">
+            This field is mandatory
+          </span>
+          <span *ngIf="passwordInput.hasError('minlength')">
+            This field must contain atleast 2 characters
+          </span>
+        </small>
       </div>
       <div class="btns">
         <div class="btn-left">
           <button
             type="submit"
-            class="btn btn-success my-3"
+            class="btn btn-success my-1"
             (click)="displayDetails(); sendData($event)"
           >
             Register
@@ -60,7 +120,7 @@
         <div class="btn-right">
           <p>Already an user</p>
           <a [routerLink]="['/login']">
-            <button type="submit" class="btn btn-primary my-3">Login</button>
+            <button type="submit" class="btn btn-primary my-1">Login</button>
           </a>
         </div>
       </div>

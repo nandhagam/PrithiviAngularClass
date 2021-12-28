@@ -1,6 +1,6 @@
 <div class="container">
   <div class="form pt-3">
-    <form #loginform="ngForm">
+    <form #loginform="ngForm" (ngSubmit)="formData()">
       <div class="form-group mb-3">
         <label for="email">Email:</label>
         <input
@@ -9,8 +9,25 @@
           placeholder="Enter Your Email Address"
           #email
           (key.enter)="submitValue($event)"
+          name="email"
+          #emailInput="ngModel"
+          email
+          required
+          ngModel
         />
+        <small
+          *ngIf="loginform.submitted"
+          [ngStyle]="{ color: 'red', 'font-weight': 'bolder' }"
+        >
+          <span *ngIf="emailInput.hasError('required')">
+            This field is mandatory
+          </span>
+          <span *ngIf="emailInput.hasError('email')">
+            Please enter a valid email address
+          </span>
+        </small>
       </div>
+
       <div class="form-group mb-3">
         <label for="password">Password:</label>
         <input
@@ -19,7 +36,24 @@
           placeholder="Enter Your Password"
           #password
           (key.enter)="submitValue($event)"
+          name="password"
+          #passwordInput="ngModel"
+          ngModel
+          minlength="2"
+          maxlength="12"
+          required
         />
+        <small
+          *ngIf="loginform.submitted"
+          [ngStyle]="{ color: 'red', 'font-weight': 'bolder' }"
+        >
+          <span *ngIf="passwordInput.hasError('required')">
+            This field is mandatory
+          </span>
+          <span *ngIf="passwordInput.hasError('minlength')">
+            This field must contain atleast 2 characters
+          </span>
+        </small>
       </div>
       <div class="btns">
         <div class="btn-left">
