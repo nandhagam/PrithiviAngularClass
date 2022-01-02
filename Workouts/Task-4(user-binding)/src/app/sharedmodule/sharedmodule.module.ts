@@ -31,7 +31,7 @@ const routes: Routes = [
   ],
   exports: [
     HeaderComponent, FooterComponent, FontAwesomeModule, BgcolorDirective,
-    CustomStructuralDirective, CustomPipe
+    CustomStructuralDirective, CustomPipe, FormsModule
   ]
 })
 export class SharedmoduleModule { }

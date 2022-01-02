@@ -4,7 +4,7 @@ h2 {
 }
 .form {
   width: 275px;
-  height: 35vh;
+  height: 40vh;
   max-width: 100%;
   margin: auto;
   margin-top: 50px;
@@ -14,10 +14,4 @@ h2 {
     rgba(238, 238, 174, 1) 0%,
     rgba(153, 148, 233, 1) 100%
   );
-}
-.left {
-  float: left;
-}
-.right {
-  float: right;
 }

@@ -1,14 +1,12 @@
 <div class="container">
   <div class="form pt-3">
-    <form #loginform="ngForm" (ngSubmit)="formData()">
+    <form #loginform="ngForm" (ngSubmit)="submitValue(loginform)">
       <div class="form-group mb-3">
         <label for="email">Email:</label>
         <input
           type="email"
           class="form-control mt-2"
           placeholder="Enter Your Email Address"
-          #email
-          (key.enter)="submitValue($event)"
           name="email"
           #emailInput="ngModel"
           email
@@ -34,8 +32,6 @@
           type="password"
           class="form-control mt-2"
           placeholder="Enter Your Password"
-          #password
-          (key.enter)="submitValue($event)"
           name="password"
           #passwordInput="ngModel"
           ngModel
@@ -58,13 +54,7 @@
       <div class="btns">
         <div class="btn-left">
           <a>
-            <button
-              type="submit"
-              class="btn btn-success my-2"
-              (click)="submitValue($event)"
-            >
-              Submit
-            </button>
+            <button type="submit" class="btn btn-success my-2">Submit</button>
           </a>
         </div>
         <div class="btn-right">

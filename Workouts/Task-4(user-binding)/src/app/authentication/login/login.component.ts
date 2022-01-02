@@ -1,5 +1,6 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Component } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -8,24 +9,21 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 
 export class LoginComponent {
-    constructor(private router: Router, private activatedroute: ActivatedRoute) {
+    constructor(private router: Router) {
     }
     storeValue: Array<any>;
     firstname: string;
     lastname: string;
     counter: number = 0;
     store: object;
-    @ViewChild("email") Email: ElementRef;
-    @ViewChild("password") Password: ElementRef;
-    @ViewChild("loginform") loginForm: any;
 
 
-    submitValue = ($event: any) => {
 
+    /* submitValue(formData: NgForm) {
         this.storeValue = JSON.parse(localStorage.getItem("userDetails")) || [];
         for (let x in this.storeValue) {
-            if (this.Email.nativeElement.value == this.storeValue[x].email &&
-                this.Password.nativeElement.value == this.storeValue[x].password) {
+            if (formData.controls.email.value == this.storeValue[x].email &&
+                formData.controls.password.value == this.storeValue[x].password) {
                 this.store = {
                     firstname: this.storeValue[x].firstname,
                     lastname: this.storeValue[x].lastname,
@@ -38,8 +36,8 @@ export class LoginComponent {
             }
         }
         for (let x in this.storeValue) {
-            if (this.Email.nativeElement.value != this.storeValue[x].email
-                || this.Password.nativeElement.value != this.storeValue[x].password) {
+            if (formData.controls.email.value != this.storeValue[x].email
+                || formData.controls.password.value != this.storeValue[x].password) {
                 this.counter = this.counter + 1;
             }
         }
@@ -47,8 +45,38 @@ export class LoginComponent {
             alert("Entered email does not exist or check your credentials");
             this.counter = 0;
         }
+    } */
+
+    submitValue(formData: NgForm) {
+        this.storeValue = JSON.parse(localStorage.getItem("userDetails")) || [];
+        let index = this.storeValue.findIndex(
+            (user) => user.email == formData.controls.email.value
+                && user.password == formData.controls.password.value);
+        console.log(index);
+        /*  console.log(this.storeValue[index].firstname);
+         console.log(this.storeValue[index].lastname);
+         console.log(this.storeValue[index].email);
+         console.log(this.storeValue[index].password); */
+        if (index != -1) {
+            this.store = {
+                firstname: this.storeValue[index].firstname,
+                lastname: this.storeValue[index].lastname,
+                email: this.storeValue[index].email,
+                password: this.storeValue[index].password
+            };
+            sessionStorage.setItem("userDetails", JSON.stringify(this.store));
+            this.router.navigate(['welcome'],
+                {
+                    queryParams:
+                    {
+                        firstname: this.storeValue[index].firstname,
+                        lastname: this.storeValue[index].lastname
+                    }
+                });
+        }
+        else {
+            alert("Entered email does not exist or check your credentials");
+        }
     }
-    formData() {
-        console.log(this.loginForm);
-    }
+
 }
